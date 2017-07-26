@@ -1,5 +1,5 @@
 {
-  "name": "generator-azuresfjava",
+  "name": "generator-azuresfguest",
   "version": "0.0.0",
   "description": "Azure Service Fabric guest binary app template generator",
   "homepage": "https://azure.microsoft.com/en-in/services/service-fabric/",
