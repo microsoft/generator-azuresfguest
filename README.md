@@ -1,4 +1,35 @@
 
+# generator-azure-node
+> Yeoman generator for Azure Service Fabric guest executable projects
+
+## Installation
+
+First, install [Yeoman](http://yeoman.io) and generator-azuresfguest using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+
+```bash
+npm install -g yo
+npm install -g generator-azuresfguest
+```
+
+Then generate your new project:
+
+```bash
+yo azuresfguest
+```
+
+## Getting To Know Yeoman
+
+ * Yeoman has a heart of gold.
+ * Yeoman is a person with feelings and opinions, but is very easy to work with.
+ * Yeoman can be too opinionated at times but is easily convinced not to be.
+ * Feel free to [learn more about Yeoman](http://yeoman.io/).
+
+## License
+
+MIT
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
