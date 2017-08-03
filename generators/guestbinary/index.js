@@ -188,6 +188,26 @@ module.exports = generators.Base.extend({
                         appTypeName: appTypeName
                     }
                 );
+
+                this.fs.copyTpl(
+                    this.templatePath('deploy/install-sfctl.sh'),
+                    this.destinationPath(path.join(this.projName, 'install-sfctl.sh')),
+                    {
+                        appPackage: this.projName,
+                        appName: this.projName,
+                        appTypeName: appTypeName
+                    }
+                );
+
+                this.fs.copyTpl(
+                    this.templatePath('deploy/uninstall-sfctl.sh'),
+                    this.destinationPath(path.join(this.projName, 'uninstall-sfctl.sh')),
+                    {
+                        appPackage: this.projName,
+                        appName: this.projName,
+                        appTypeName: appTypeName
+                    }
+                );
             }
 
         }
