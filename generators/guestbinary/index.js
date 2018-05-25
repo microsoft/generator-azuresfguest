@@ -150,10 +150,8 @@ module.exports = generators.Base.extend({
             var appTypeName = this.projName + 'Type';
             var pkgDir = this.isAddNewService == false ? path.join(this.projName, this.projName) : this.projName;
             var is_Windows = (process.platform == 'win32');
-            var is_Linux = (process.platform == 'linux');
-            var is_mac = (process.platform == 'darwin');
             var sdkScriptExtension;
-            if(is_Windows)
+            if (is_Windows)
             {
                 sdkScriptExtension = '.ps1';
             }
