@@ -97,7 +97,6 @@ module.exports = generators.Base.extend({
     * Write the generator specific files
     */
     writing: {
-
         application: function() {
 
             var appPackagePath = this.isAddNewService ? this.projName : path.join(this.projName, this.projName);
@@ -107,7 +106,7 @@ module.exports = generators.Base.extend({
             var appTypeName = this.projName + 'Type';
             var instanceCount = this.props.instanceCount;
 
-            if (this.isAddNewService) {
+                if (this.isAddNewService) {
                 var fs = require('fs');
                 var xml2js = require('xml2js');
                 var parser = new xml2js.Parser();
@@ -150,6 +149,15 @@ module.exports = generators.Base.extend({
             var serviceTypeName = this.props.serviceName + 'Type';
             var appTypeName = this.projName + 'Type';
             var pkgDir = this.isAddNewService == false ? path.join(this.projName, this.projName) : this.projName;
+            var is_Windows = (process.platform == 'win32');
+            var sdkScriptExtension;
+            if (is_Windows)
+            {
+                sdkScriptExtension = '.ps1';
+            }
+            else {
+                sdkScriptExtension = '.sh';
+            }
 
             this.fs.copyTpl(  this.templatePath('Service/ServiceManifest.xml'),
                 this.destinationPath(path.join(pkgDir, servicePkg, '/ServiceManifest.xml')),
@@ -170,8 +178,8 @@ module.exports = generators.Base.extend({
             );
             if (!this.isAddNewService) {
                 this.fs.copyTpl(
-                    this.templatePath('deploy/install.sh'),
-                    this.destinationPath(path.join(this.projName, 'install.sh')),
+                    this.templatePath('deploy/install'+sdkScriptExtension),
+                    this.destinationPath(path.join(this.projName, 'install'+sdkScriptExtension)),
                     {
                         appPackage: this.projName,
                         appName: this.projName,
@@ -180,8 +188,8 @@ module.exports = generators.Base.extend({
                 );
 
                 this.fs.copyTpl(
-                    this.templatePath('deploy/uninstall.sh'),
-                    this.destinationPath(path.join(this.projName, 'uninstall.sh')),
+                    this.templatePath('deploy/uninstall'+sdkScriptExtension),
+                    this.destinationPath(path.join(this.projName, 'uninstall'+sdkScriptExtension)),
                     {
                         appPackage: this.projName,
                         appName: this.projName,
