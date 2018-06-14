@@ -58,3 +58,7 @@ Once you have figured out all the legalities above, you can follow the steps bel
 * Create a new project with ```yo azuresfguest``` (ensure it picks Yeo node-module bits from your local changes)
 * Validate that changes are working as expected and not breaking anything regressively - following the steps mentioned in the [documentation](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-deploy-existing-app#use-yoeman-to-package-and-deploy-an-existing-executable-on-linux) by creating and deploying the generated project on a Service Fabric cluster
 * Raise a pull request and share with us 
+
+# Known Issues 
+
+* If you are using Node 8.1.0 the yeoman generators freeze. The behaviour is that the prompt stops accepting input. Updating to Node 8.11.2 will fix this issue. Thanks to Nicolas for the call out [#3](https://github.com/Microsoft/generator-azuresfguest/issues/3).
