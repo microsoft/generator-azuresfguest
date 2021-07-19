@@ -1,15 +1,14 @@
 'use strict';
 
-var generators = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var path   = require('path');
 
-module.exports = generators.Base.extend({
+module.exports = class extends Generator {
 
-    constructor: function () {
-
-        generators.Base.apply(this, arguments);
+    constructor(args, opts) {
+        super(args, opts);
 
         this.option('serviceName', { type: String, required: false });    
         this.option('guestBinarySourceFolder', { type: String, required: false });
@@ -21,20 +20,16 @@ module.exports = generators.Base.extend({
 
         this.generatorConfig = {};
 
-    }, // constructor()
+    } // constructor()
 
-    _isOptionSet: function(name) {
+    _isOptionSet(name) {
         return this.options[name] !== undefined;
-    },
+    }
 
     /**
     * Prompt users for options
     */
-    prompting: {
-
-        askForService: function(){
-
-            var done = this.async();
+    async prompting() {
             var prompts = [
 
                 {
@@ -71,33 +66,28 @@ module.exports = generators.Base.extend({
 
             ];
 
-            this.prompt(prompts, function(props) {
+            await this.prompt(prompts).then(props => {
                 this.props = props;
-                done();
-            }.bind(this)
-            );
+            }); // askForService()
 
-        } // askForService()
-
-    }, // prompting()
+    } // prompting()
 
     /**
     * Save configurations and configure the project
     */
-    configuring: {
+    configuring() {
 
 
-    }, // configuring()
+    } // configuring()
 
-    initializing: function () {
+    initializing() {
         this.props = this.config.getAll();
         this.projName = this.props.projName;
-    }, // initializing()
+    } // initializing()
     /**
     * Write the generator specific files
     */
-    writing: {
-        application: function() {
+    writing() {
 
             var appPackagePath = this.isAddNewService ? this.projName : path.join(this.projName, this.projName);
             var servicePkgName = this.props.serviceName + 'Pkg';
@@ -142,9 +132,6 @@ module.exports = generators.Base.extend({
                     }
                 ); 
             }
-        }, 
-
-        service: function() {
             var servicePkg = this.props.serviceName + 'Pkg';
             var serviceTypeName = this.props.serviceName + 'Type';
             var appTypeName = this.projName + 'Type';
@@ -198,8 +185,6 @@ module.exports = generators.Base.extend({
                 );
             }
 
-        }
-
     } // writing()
 
-});
+};
