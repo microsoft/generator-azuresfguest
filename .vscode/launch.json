@@ -1,0 +1,16 @@
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node", 
+            "request": "launch", 
+            "name": "azuresfguest generator", 
+            "program": "/usr/local/bin/yo", 
+            "args": [ "azuresfguest" ],
+            "cwd": "/tmp", 
+            "console": "integratedTerminal", 
+            "internalConsoleOptions": "neverOpen" 
+        }
+    ]
+}

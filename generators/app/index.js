@@ -1,18 +1,16 @@
 'use strict';
 
 var path      = require('path')
-  , generators    = require('yeoman-generator')
+  , Generator    = require('yeoman-generator')
   , yosay     = require('yosay');
-var GuestGenerator = generators.Base.extend({
-  constructor: function () {
-    generators.Base.apply(this, arguments);
+var GuestGenerator = class extends Generator{
+  constructor(args, opts) {
+    super(args, opts);
 
     this.desc('Generate Service Fabric guest application template');
-  },
+  }
 
-  prompting: function () {
-    var done = this.async();
-
+  async prompting() {
     this.log(yosay(
         'Welcome to Service Fabric guest application generator'
     ));
@@ -28,23 +26,21 @@ var GuestGenerator = generators.Base.extend({
       }
     }];
 
-    this.prompt(prompts, function (props) {
+    await this.prompt(prompts).then(props => {
       this.props = props;
       this.props.projName = this.props.projName.trim();
       this.config.set(props);
+    });
+  }
 
-      done();
-    }.bind(this));
-  },
-
-  writing: function() {
+  writing() {
     var isAddNewService = false;
     this.composeWith('azuresfguest:guestbinary', {
         options: { isAddNewService: isAddNewService }
     });
-  },
+  }
   
-  end: function () {
+  end() {
     this.config.save();
     //this is for Add Service
     var nodeFs = require('fs');
@@ -53,7 +49,7 @@ var GuestGenerator = generators.Base.extend({
     }
 
   }
-});
+};
 
 module.exports = GuestGenerator;
 
