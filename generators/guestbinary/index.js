@@ -175,6 +175,14 @@ module.exports = class extends Generator {
                 );
 
                 this.fs.copyTpl(
+                    this.templatePath('deploy/upgrade'+sdkScriptExtension),
+                    this.destinationPath(path.join(this.projName, 'upgrade'+sdkScriptExtension)),
+                    {
+                        appPackage: this.projName
+                    }
+                );
+
+                this.fs.copyTpl(
                     this.templatePath('deploy/uninstall'+sdkScriptExtension),
                     this.destinationPath(path.join(this.projName, 'uninstall'+sdkScriptExtension)),
                     {
